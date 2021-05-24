@@ -5,9 +5,11 @@ A collection of tools, scripts, and other info for reverse engineering
  - nop_skipper.py
    - de-obfuscates programs that contain large chunks of NOPs
    - created to deal with 71KB program that used huge chunks of NOPs between instructions, causing IDA and Ghidra to crash while disassembling
+   - works by inserting `jmp` instructions to skip over large chunks of NOPs without disrupting relative addresses or other position-dependant structures
  - brute_dict.py
    - reverses an encoding/encryption scheme by mapping inputs to outputs
    - useful for decoding stuff without needing to reverse the encoding/encryption process
+   - works by using the encoding/encryption algorithm to build a dictionary in the format `(encoded_char, key) = decoded_char` then use the dictionary to decode a message
 
 ## Programs/Tools
  - Ghidra
