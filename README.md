@@ -3,3 +3,6 @@ A collection of tools, scripts, and useful info I've built up from playing in CT
 
 ## Categories
  - [Reversing](./reversing/)
+   - Scripts and tools for reverse engineering
+ - [Misc](./misc/)
+   - Scripts and tools that can be used for a variety of tasks
