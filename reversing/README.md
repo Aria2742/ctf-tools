@@ -25,7 +25,10 @@ A collection of tools, scripts, and other info for reverse engineering
    - basic ELF header/section analysis tool
    - can detect anti-RE techniques
  - [Cheat Engine](https://www.cheatengine.org/)
-   - useful for madifying program values during runtime
+   - useful for modifying program values during runtime
+ - [GameConqueror](https://github.com/scanmem/scanmem)
+   - Linux equivalent of Cheat Engine
+   - can be installed through apt
  - [NI LabView (Community Edition)](https://www.ni.com/en-us/support/downloads/software-products/download.labview.html#370001)
    - used for running and debugging .vi files
  - [OpenOffice](https://www.openoffice.org/)
