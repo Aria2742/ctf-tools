@@ -13,3 +13,7 @@ A collection of tools, scripts, and other info that can be used for a variety of
 
 ## Programs/Tools
  - TBD
+
+## Additional Knowledge/Info
+ - [python_tricks.py](./python_tricks.py)
+   - collection of tips and tricks for using Python to solve challenges
