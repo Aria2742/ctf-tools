@@ -1,0 +1,58 @@
+if S == 0:
+	S = 24
+if S == 1:
+	S = 2
+	for Rx in R0-R7:
+		Rx = !RX
+if S == 2:
+	S = 3
+	Z0 = 1
+	for Zx in Z1-Z7:
+		Zx = 0
+if S == 3:
+	S = 4
+	C = 0
+	R = R + Z // C used internally for carry bit
+if S == 4:
+	S = 5
+	C = 0
+	R = R + Z // C used internally for carry bit
+if S == 5:
+	S = 6
+	if R == 0:
+		S = 38
+if S == 6:
+	S = 7
+	C = 0
+	R = R + Z
+if S == 7:
+	S = 8
+	if R == 0:
+		S = 59
+if S == 8:
+	S = 9
+	C = 0
+	R = R + Z
+if S == 9:
+	S = 10
+	if R == 0:
+		S = 59
+if S == 10:
+	S = 11
+	throw new exception("BUG")
+if S == 11:
+	S = 12
+	S = -1
+if S == 12:
+	S = 13
+	X0 = 1
+	X1-X7 = 0
+if S == 13:
+	S = 14
+	Y0-Y7 = 0
+if S == 14:
+	S = 15
+	if X == 0:
+		S = 22
+if S == 15:
+	

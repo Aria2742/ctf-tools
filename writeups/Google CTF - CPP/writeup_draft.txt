@@ -1,0 +1,12 @@
+# CPP
+
+# Description
+We have this program's source code, but it uses a strange DRM solution. Can you crack it?
+
+# Forward / Thoughts After Solving
+The path I took to solving this is much longer than it needed to be. There were multiple points where I should've noticed that the flag can be brute forced one letter at a time. That being said, I will still explain my entire process for solving this challenge.
+
+# First Analysis
+Opening up cpp.c for the first time was quite a surprise. Instead of finding C code, I was greeted by 6000+ lines of C preprocessor directives and macros. To make the code more readable, I created a short Python script to add indentation to the cpp.c file.
+
+Reading through the cpp.c code more, I found it could be broken into a few categoris.

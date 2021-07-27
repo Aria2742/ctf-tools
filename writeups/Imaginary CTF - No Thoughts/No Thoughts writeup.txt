@@ -1,0 +1,4 @@
+run brainfuck - it prints flag but slows down with each char
+Create Python code to translate brainfuck into Python
+use print statements to figure out where code is slowing down
+reduce code so instead of looping, it does entire loop operation in one pass

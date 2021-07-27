@@ -6,3 +6,5 @@ A collection of tools, scripts, and useful info I've built up from playing in CT
    - Scripts and tools for reverse engineering
  - [Misc](./misc/)
    - Scripts and tools that can be used for a variety of tasks
+ - [Write-ups](./writeups/)
+   - Write-ups from previously solved challenges

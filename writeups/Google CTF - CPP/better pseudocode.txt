@@ -1,0 +1,30 @@
+I = 0
+M = 0
+N = 1
+P = 0
+Q = 0
+
+while I < 27:
+	A = flag[I]
+	B = rom[I]
+	R = 1
+	X = 1
+	Y = 0
+	while X < 0x100:
+		if X & B != 0:
+			Y += A
+		X = X << 1
+		A *= 2
+	A = Y
+	// R = ~R + 2
+	// if R == 0:
+	O = M + N
+	M = N
+	N = O
+	A += M
+	A = A ^ rom[0x20 + I]
+	P += A
+	A = rom[0x40 + I] ^ P
+	if A != 0:
+		print('Failed to get flag!')
+	I += 1
