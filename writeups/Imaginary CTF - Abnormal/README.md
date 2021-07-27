@@ -11,12 +11,69 @@ compile: `iverilog -o normal.vvp -s main normal.v`
 run: `vvp normal.vvp`
 
 ## Initial Analysis
-TODO - describe code...
+The code consists of 5 different modules (which act like functions):
+  - main
+  - abnormal
+  - norc
+  - narb
+  - nora
+
+### Main & Abnormal
+The main module begins by delcaring two wires, `flag` and `wrong`, that each hold 256 bits. From a programming perspective and for the purpose of solving this challenge, wires can be thought of as bit arrays. The flag is then passed to the `abnormal` module, with `wrong` being set to the output of the call. If `wrong` is set to all zeroes, then the flag is correct.
+
+The 'abnormal' module concatenates the flag to a predefined string, which is then passed to `norc` and the result is stored in a wire named `w1`. Another predefined string is then passed to `norc` and the result is stored in a wire named `w2`. Then, using NOR operations, `w1` and `w2` are XOR'ed and the result is returned.
+
+In pseudocode, `main` and `abnormal` would be something like this:
+```
+abnormal(flag):
+    w1 = norc(predefined_str_1 + flag)
+    w2 = norc(predefined_str_2)
+    return w1 XOR w2
+
+main():
+    flag = 'ictf{__ENTER_FLAG_HERE__}'
+    wrong = abnormal(flag)
+    if wrong:
+        print 'wrong'
+    else:
+        print 'correct'
+```
+
+### NorC, NorB, & NorA
+These three modules scramble the input passed to them by splitting, rearranging, and using NOR operations on their inputs. `norc` and `norb` operate more or less the same, with the key difference being that `norc` calls `norb` and `norb` calls `nora`. For the brute force solution I used, only `norc` is the only important module to understand out of these three. I cover the `norc` module in more detail further down, but here's a code snipped and pseudocode for some background:
+
+Code:
+```
+module norc(out, in);
+    output [256:0] out;
+    input [512:0] in;
+
+    norb n1({w1, out[15:0]}, {in[512], in[271:256], in[15:0]});
+    norb n2({w2, out[31:16]}, {w1, in[31:16], in[287:272]});
+    norb n3({w3, out[47:32]}, {w2, in[303:288], in[47:32]});
+    ...
+    norb n16({out[256], out[255:240]}, {w15, in[255:240], in[511:496]});
+endmodule
+```
+
+Python-like Pseudocode:
+```
+norc(in):
+    out = 257-bit array
+    
+    w1, out[15:0] = norb(in[512] + in[271:256] + in[15:0])
+    w2, out[31:16] = norb(w1 + in[31:16] + in[287:272])
+    w3, out[47:32] = norb(w2 + in[303:288] + in[47:32])
+    ...
+    out[256], out[255:240] = (w15 + in[255:240] + in[511:496])
+    
+    return out
+```
 
 ## Initial Attempts
 I attempted to solve this challenge a couple different ways before switching to a more direct brute-force method.
 
-I first tried converting the Verilog code into Python, then modifying the Python code to brute force the flag. However, this method failed for two main reasons:
+I first tried converting the Verilog code into Python, then modifying the Python code to brute force the flag one character at a time. However, this method failed for two main reasons:
   - Bit order errors - These came from two different sources:  
     - The Verilog code declares the wires, input, and outputs such that index 0 is the last element/least significant bit. For example, the declaration `input [512:0] in;` makes it such that `in[512]` is the first element/most significant bit and `in[0]` is the last element/least significant bit. Additionally, both indicies are inclusive, so in the case of `input [512:0] in;`, `in` is 513 bits long. While I didn't notice any index errors in my Python version of the code, I wouldn't be surprised if there were errors that I missed.
     - Unpacking lists in Python. In my Python code, I used `out[16-0], w1 = nora([args[32-32], args[32-16], args[32-0]])` to simulate the behavior of `nora n1({w1, out[0]}, {in[32], in[16], in[0]});` from the Verilog code. However, I had mixed up the order of the variables when writing the code without realizing it, so my initial Python code was `out[16-0], w1 = nora(...)`. This incorrect bit order not only caused rippled out to effect the rest of the final output, but was also present in all 16 calls to `nora` within the `norb` function.
@@ -25,6 +82,11 @@ I first tried converting the Verilog code into Python, then modifying the Python
 I then tried reversing the logic of the Verilog code, but the ripple effects in the `norb` and `norc` functions made it way too tedious to fully reverse those functions.
 
 ## Successful Brute Force
+For this solution, I decided to brute force the flag (again, one character at a time) by modifying the flag within Verilog source code, then compiling and running the modified code. However, I needed to do two things before I could really follow this idea:
+  - Make sure the flag can be brute forced and what conditions, if any, need to be followed for a successful brute force
+  - Find a way to know when we've got a character right and should move on to brute forcing the next character
+
+
 
 To do this, I first needed to make sure it was possible to brute force the flag and if it had to be brute forced in a certain order. Looking at 'abnormal.v', we see
 
