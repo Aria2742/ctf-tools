@@ -86,7 +86,7 @@ For this solution, I decided to brute force the flag (again, one character at a 
   - Make sure the flag can be brute forced and what conditions, if any, need to be followed for a successful brute force
   - Find a way to know when we've got a character right and should move on to brute forcing the next character
 
-
+---------------------- EARLIR DRAFT/NOTES BELOW - DISREGARD FOR NOW ------------------------------------------
 
 To do this, I first needed to make sure it was possible to brute force the flag and if it had to be brute forced in a certain order. Looking at 'abnormal.v', we see
 
