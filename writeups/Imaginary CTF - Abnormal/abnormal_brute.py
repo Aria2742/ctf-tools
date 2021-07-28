@@ -1,6 +1,5 @@
 import subprocess
 
-to_match = '0'*64
 build_cmd = 'iverilog -o abnormal_mod.vvp -s main abnormal_mod.v'.split(' ')
 run_cmd = ['vvp', 'abnormal_mod.vvp']
 
@@ -10,9 +9,8 @@ orig.close()
 
 flag = ['6','9','6','3','7','4','6','6','7','b','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0', '0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0', '0','0','0','0','0','0','7','d']
 alpha = '0123456789abcdef'
-idx = len(flag) - 1
 
-while idx > -1:
+for idx in range(len(flag)-1, -1, -1):
 	for char in alpha:
 		flag[idx] = char
 		mod = open('abnormal_mod.v', 'w')
@@ -26,11 +24,8 @@ while idx > -1:
 		subprocess.run(build_cmd)
 		out = subprocess.run(run_cmd, stdout=subprocess.PIPE).stdout.decode('utf-8')
 		
-		if out[idx] == to_match[idx]:
-			print(f'\nMatch!\nFlag: {"".join(flag)}\nOut:  {out}Rgx:  {to_match}')
+		if out[idx] == '0':
 			break
-
-	idx -= 1
 
 print('Finished! Here\'s the flag:')
 print(''.join(flag))
