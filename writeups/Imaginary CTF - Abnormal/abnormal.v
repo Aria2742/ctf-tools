@@ -75,19 +75,17 @@ module abnormal(out, in);
     wire [255:0] w1, w2, w3, w4, w5, w6;
 
     norc n1({c1, w1}, {257'h1a86f06e4e492e2c1ea6f4d5726e6d36bec57cf31472b986a675d3bc8e5d22b81, in});
-    
-	// added block to print w1 - this allows us to brute force the flag
-	initial begin
-		#50
-		$display("%64H" w1);
-	end
-	
-	norc n2({c1, w2}, 513'h1a5e20394c934fd1198b1517d57e730cd225ccfa064ff42db76c19f3b7c0da91a6bf077b696cc4b22c0e56f4d3e6e150e386d6f04479ac502600e01fcdc29f5e4);
+    norc n2({c1, w2}, 513'h1a5e20394c934fd1198b1517d57e730cd225ccfa064ff42db76c19f3b7c0da91a6bf077b696cc4b22c0e56f4d3e6e150e386d6f04479ac502600e01fcdc29f5e4);
     nor n3 [255:0] (w3, w1, w2);
     nor n4 [255:0] (w4, w1, w3);
     nor n5 [255:0] (w5, w2, w3);
     nor n6 [255:0] (w6, w4, w5);
     nor n7 [255:0] (out, w6, w6);
+
+    initial begin
+        #50
+        $display("%64H" out);
+    end
 endmodule
 
 module main;
