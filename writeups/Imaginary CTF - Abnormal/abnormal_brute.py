@@ -1,6 +1,6 @@
 import subprocess
 
-to_match = '11d27b4b600148345996c0ca965545db5aca3ea4ac9a07ddd6cfa13858379eff'
+to_match = '0'*64
 build_cmd = 'iverilog -o abnormal_mod.vvp -s main abnormal_mod.v'.split(' ')
 run_cmd = ['vvp', 'abnormal_mod.vvp']
 
