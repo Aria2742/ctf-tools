@@ -16,8 +16,7 @@ for idx in range(len(flag)-1, -1, -1):
 		mod = open('abnormal_mod.v', 'w')
 		for line in code:
 			if line.startswith("    wire [255:0] flag = 256'h"):
-				new_flag = "    wire [255:0] flag = 256'h" + ''.join(flag) + ';\n'
-				mod.write(new_flag)
+				mod.write("    wire [255:0] flag = 256'h" + ''.join(flag) + ';\n)
 			else:
 				mod.write(line + '\n')
 		mod.close()
