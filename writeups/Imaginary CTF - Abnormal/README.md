@@ -167,4 +167,4 @@ print('Finished! Here\'s the flag:')
 print(''.join(flag))
 ```
 
-Running this script, we get the flag `ictf{_________________}` in hex.
+Running this script, we get the flag `ictf{nero'ssonronrosenosoreores}` in hex.
