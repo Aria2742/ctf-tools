@@ -81,10 +81,11 @@ module abnormal(out, in);
     nor n5 [255:0] (w5, w2, w3);
     nor n6 [255:0] (w6, w4, w5);
     nor n7 [255:0] (out, w6, w6);
-
+    
+    // added block used for brute force
     initial begin
-        #50
-        $display("%64H" out);
+        #10
+        $display("%64H", out);
     end
 endmodule
 
