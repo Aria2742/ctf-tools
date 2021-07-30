@@ -161,6 +161,7 @@ for idx in range(len(flag)-1, -1, -1):
         out = subprocess.run(run_cmd, stdout=subprocess.PIPE).stdout.decode('utf-8')
         # did we guess the right (hex) char?
         if out[idx] == '0':
+            print(''.join(flag))
             break
 
 print('Finished! Here\'s the flag:')
