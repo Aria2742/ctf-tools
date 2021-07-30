@@ -117,11 +117,11 @@ Two important patterns emaerged from this second analysis:
 
 Together, these two things mean we can brute force the flag 1 to 16 bits at a time from right to left. The flag must be brute forced from right to left because of the direction/order of the output chaining.
 
-Finally, to provide the output needed for a brute force attack, we can add the following code block to the `main` module:
+Finally, to provide the output needed for a brute force attack, the following code can be added to `abnormal` to print the module's output:
 ```Verilog
 initial begin
     #10
-    $display("%64H" wrong);
+    $display("%64H", out);
 end
 ```
 This will display the output of the `abnormal` module in hex. We can then check if the string ends in all zeroes to know how many (hex) characters of the flag are correct. If the output ends in N zeroes, we know that the last N (hex) characters of the flag are correct.
@@ -152,7 +152,7 @@ for idx in range(len(flag)-1, -1, -1):
         mod = open('abnormal_mod.v', 'w')
         for line in code:
             if line.startswith("    wire [255:0] flag = 256'h"):
-                mod.write("    wire [255:0] flag = 256'h" + ''.join(flag) + ';\n)
+                mod.write("    wire [255:0] flag = 256'h" + ''.join(flag) + ';\n')
             else:
                 mod.write(line + '\n')
         mod.close()
@@ -167,4 +167,4 @@ print('Finished! Here\'s the flag:')
 print(''.join(flag))
 ```
 
-Running this script, we get the flag `ictf{_________________}`
+Running this script, we get the flag `ictf{_________________}` in hex.
