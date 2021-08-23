@@ -36,3 +36,5 @@ A collection of tools, scripts, and other info for reverse engineering
    - NI has plugins for viewing file formats associated with .vi files (such as TDMS files)
  - [cryptii](https://cryptii.com/)
    - modular conversion, encoding/decoding and encryption/decryption online
+ - [JetBrains dotPeek](https://www.jetbrains.com/decompiler/)
+   - decompiler for .NET programs
