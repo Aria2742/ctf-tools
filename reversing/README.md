@@ -38,3 +38,4 @@ A collection of tools, scripts, and other info for reverse engineering
    - modular conversion, encoding/decoding and encryption/decryption online
  - [JetBrains dotPeek](https://www.jetbrains.com/decompiler/)
    - decompiler for .NET programs
+   - [Using dotPeek & Visual Studio to debug .NET applications](https://www.domstamand.com/debugging-your-dotnet-applications-and-packages-howto/) 
